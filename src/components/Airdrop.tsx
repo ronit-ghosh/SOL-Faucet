@@ -37,8 +37,7 @@ export default function Airdrop() {
     }
 
     return (
-        <div className="w-87 mx-auto flex flex-col gap-2">
-            <div className="flex gap-2">
+        <div className="w-87 mx-auto flex gap-2">
                 <Input
                     placeholder="Enter Airdrop Amount"
                     onChange={e => setAmount(parseInt(e.target.value))}
@@ -49,10 +48,6 @@ export default function Airdrop() {
                     onClick={sendAirdrop}>
                     {loading ? "Airdroping" : "Airdrop"}
                 </Button>
-            </div>
-            <div className="">
-                {wallet.publicKey?.toBase58()}
-            </div>
         </div>
     )
 }
