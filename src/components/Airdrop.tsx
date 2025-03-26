@@ -5,19 +5,26 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { useState } from "react"
 import { toast } from "sonner"
+import { LAMPORTS_PER_SOL } from "@solana/web3.js"
 
 export default function Airdrop() {
-    const wallet = useWallet()
-    const pubKey = wallet.publicKey
     const { connection } = useConnection()
+    const wallet = useWallet()
     const [amount, setAmount] = useState<number>()
     const [loading, setLoading] = useState(false)
 
     async function sendAirdrop() {
+        const pubKey = wallet.publicKey
+
+        if (!pubKey || !amount) {
+            toast("Please connect your wallet and enter a valid amount.");
+            return
+        }
+        
         try {
             setLoading(true)
-            if (!wallet.publicKey || !amount) return
-            await connection.requestAirdrop(wallet.publicKey, amount * 1000000000)
+            const txn = await connection.requestAirdrop(pubKey, amount * LAMPORTS_PER_SOL)
+            console.log(txn)
             toast(`Airdropped ${amount} SOL to ${pubKey}🚀`)
             setLoading(false)
         } catch (error) {
@@ -30,17 +37,22 @@ export default function Airdrop() {
     }
 
     return (
-        <div className="w-87 mx-auto flex gap-2">
-            <Input
-                placeholder="Enter Airdrop Amount"
-                onChange={e => setAmount(parseInt(e.target.value))}
-            />
-            <Button
-                disabled={!amount || !pubKey || loading}
-                variant="accent"
-                onClick={sendAirdrop}>
-                {loading ? "Airdroping" : "Airdrop"}
-            </Button>
+        <div className="w-87 mx-auto flex flex-col gap-2">
+            <div className="flex gap-2">
+                <Input
+                    placeholder="Enter Airdrop Amount"
+                    onChange={e => setAmount(parseInt(e.target.value))}
+                />
+                <Button
+                    disabled={!amount || !wallet.publicKey || loading}
+                    variant="accent"
+                    onClick={sendAirdrop}>
+                    {loading ? "Airdroping" : "Airdrop"}
+                </Button>
+            </div>
+            <div className="">
+                {wallet.publicKey?.toBase58()}
+            </div>
         </div>
     )
 }
