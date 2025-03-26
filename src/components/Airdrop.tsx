@@ -21,7 +21,7 @@ export default function Airdrop() {
             toast(`Airdropped ${amount} SOL to ${pubKey}🚀`)
             setLoading(false)
         } catch (error) {
-            toast("Limit exceeded")
+            toast("Limit Exceeded!")
             console.error(error)
             setLoading(false)
         } finally {
