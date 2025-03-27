@@ -1,7 +1,5 @@
 "use client"
 
-import '@solana/wallet-adapter-react-ui/styles.css';
-import Airdrop from '@/components/Airdrop';
 import dynamic from 'next/dynamic';
 // For Hydration Error 
 // ref: https://solana.stackexchange.com/questions/4304/error-hydration-failed-because-the-initial-ui-does-not-match-what-was-rendered
@@ -14,16 +12,13 @@ const WalletDisconnectButtonDynamic = dynamic(
     async () => (await import('@solana/wallet-adapter-react-ui')).WalletDisconnectButton,
     { ssr: false }
 );
+import '@solana/wallet-adapter-react-ui/styles.css';
 
-export default function Main() {
-
+export default function Wallet() {
     return (
-        <div className='h-dvh w-96 mx-auto flex flex-col justify-center items-center'>
-            <Airdrop />
-            <div className="flex gap-2 mt-4">
+        <div className="flex gap-2 mt-2">
             <WalletMultiButtonDynamic />
             <WalletDisconnectButtonDynamic />
-            </div>
         </div>
-    );
+    )
 }

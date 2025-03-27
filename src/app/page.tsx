@@ -1,8 +1,8 @@
-import Main from '@/components/Main'
+import Faucet from '@/components/Faucet'
 import React from 'react'
 
 export default function page() {
   return (
-    <Main />
+    <Faucet />
   )
 }

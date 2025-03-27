@@ -47,7 +47,7 @@ export default function Airdrop() {
     }, [wallet])
 
     return (
-        <div className="w-87 mx-auto flex flex-col gap-2">
+        <div className="w-89 mx-auto flex flex-col gap-2">
             <div className="text-center h-10 uppercase font-bold bg-secondary text-primary/90 py-2 rounded">
                 {!balance ? "" : `Current Balance: ${balance} SOL`}
             </div>

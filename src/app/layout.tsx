@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Solana Faucet",
-  description: "Airdrop SOL to Devnet Account",
+  description: "Airdrop or Send SOL to Devnet Account",
 };
 
 export default function RootLayout({
